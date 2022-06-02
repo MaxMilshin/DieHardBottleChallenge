@@ -21,5 +21,3 @@ def or_link(main_formula, addition_formula):
 		symbol = '|'
 	return main_formula[:-1] + symbol + addition_formula + ')'
 
-# clauses = [[1, 2], [-1, 2], [2, 3], [2, 3, 3], [2], [-4]]
-# print(show_cnf(clauses))

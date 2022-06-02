@@ -82,8 +82,6 @@ def is_number_equal_to_given_numbers_sum(z: [int], x: [int], y: [int], cur_var_n
 			clauses_2 = [[z[i]]]
 			add_clauses(clauses_2, _get_three_bits_xor_equals_true(x[i], y[i], last_carry))
 
-			# convert to CNF "clauses_1 or clauses_2"
-			# add_clauses(all_clauses, convert_to_cnf([clauses_1, clauses_2]))
 			local_formula = or_link(local_formula, show_cnf(clauses_1))
 			local_formula = or_link(local_formula, show_cnf(clauses_2))
 
@@ -101,8 +99,6 @@ def is_number_equal_to_given_numbers_sum(z: [int], x: [int], y: [int], cur_var_n
 
 			last_carry = new_carry
 
-			# convert co cnf "carry_clauses_1 or carry_clauses_2"
-			# add_clauses(all_clauses, convert_to_cnf([carry_clauses_1, carry_clauses_2]))
 			local_formula_for_carry = or_link(local_formula_for_carry, show_cnf(carry_clauses_1))
 			local_formula_for_carry = or_link(local_formula_for_carry, show_cnf(carry_clauses_2))
 		

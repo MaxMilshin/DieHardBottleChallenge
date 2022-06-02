@@ -17,7 +17,6 @@ def run_satsolver(steps_count, big_var_size, bottles_size, desired_number):
 	return output, var_count
 
 def main():
-
 	bottles_size = list(map(int, input().split()))
 	desired_number = int(input())
 
@@ -43,10 +42,10 @@ def main():
 		print('Impossible')
 		exit(0)
 
-	first_bottle_in, second_bottle_in = recover_answer(output, var_count, big_var_size, steps_count)
-	print(first_bottle_in)
-	print(second_bottle_in)
-
+	bottle_in = recover_answer(output, var_count, big_var_size, steps_count, len(bottles_size))
+	for bottle_trace in bottle_in:
+		print(bottle_trace)
+	
 if __name__ == "__main__":
 	main()
 
