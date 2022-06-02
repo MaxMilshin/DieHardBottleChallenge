@@ -1,15 +1,23 @@
-from formula_manager import make_big_var, clean_clauses, add_clauses, convert_to_cnf
+from formula_manager import make_big_var, add_clauses
 from arithmetic_api import is_number_equal_to_given_constant, are_numbers_equal, is_first_number_least, is_number_equal_to_given_numbers_sum
 from printer import and_link, or_link
 
 
-def build_formula(steps_count, big_var_size, bottles_size):
-	
-	x = []
-	y = []
+def build_formula(steps_count, big_var_size, bottles_size, desired_number):
+	bottles_count = len(bottles_size)
+
+	# main_vars = [[] for i in range(bottles_count)]
 	cur_var_number = 1
 
-	for i in range(steps_count):
+	# for i in range(steps_count):
+	# 	for j in range(bottles_count):
+	# 		big_var, cur_var_number = make_big_var(big_var_size, cur_var_number)
+	# 		main_vars[j].append(big_var)
+
+	x = []
+	y = []
+
+	for i in range(steps_count):				
 		big_var, cur_var_number = make_big_var(big_var_size, cur_var_number)
 		x.append(big_var)
 		big_var, cur_var_number = make_big_var(big_var_size, cur_var_number)
@@ -18,11 +26,7 @@ def build_formula(steps_count, big_var_size, bottles_size):
 	overall_formula = '()'
 	overall_formula = and_link(overall_formula, is_number_equal_to_given_constant(x[0], bottles_size[0]))
 	overall_formula = and_link(overall_formula, is_number_equal_to_given_constant(y[0], bottles_size[1]))
-	overall_formula = and_link(overall_formula, is_number_equal_to_given_constant(x[steps_count - 1], 0))
-	overall_formula = and_link(overall_formula, is_number_equal_to_given_constant(y[steps_count - 1], bottles_size[1]))
-	# print(overall_formula)
-
-
+	
 	for i in range(steps_count - 1):
 		j = i + 1
 		main_cnf = [[] for i in range(9)]
@@ -89,8 +93,6 @@ def build_formula(steps_count, big_var_size, bottles_size):
 
 
 		# x, y -> n, x + y - n and x + y >= n (make first bottle complete, pouring water from second bottle)
-		# y[i] - (n - x[i]) = y[j]
-		# y[i] + x[i] = y[j] + n
 		local_formula = '()'
 		local_formula = and_link(local_formula, is_number_equal_to_given_constant(x[j], bottles_size[0]))
 		w, cur_var_number = make_big_var(big_var_size, cur_var_number)
@@ -109,5 +111,12 @@ def build_formula(steps_count, big_var_size, bottles_size):
 
 		
 		overall_formula = and_link(overall_formula, step_formula)
+
+	end_state_condition_formula = '()'
+	end_state_condition_formula = or_link(end_state_condition_formula, is_number_equal_to_given_constant(x[steps_count - 1], desired_number))
+	end_state_condition_formula = or_link(end_state_condition_formula, is_number_equal_to_given_constant(y[steps_count - 1], desired_number))
+	
+	overall_formula = and_link(overall_formula, end_state_condition_formula)
+	# overall_formula = and_link(overall_formula, is_number_equal_to_given_constant(y[steps_count - 1], 2))
 
 	return overall_formula, cur_var_number

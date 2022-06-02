@@ -1,5 +1,5 @@
 from boolean_engine import _are_bits_equal, _are_bits_inequal, _is_first_bit_least, _get_nand, _get_and, _get_three_bits_xor_equals_false, _get_three_bits_xor_equals_true, _get_at_most_one_bit_equals_true, _get_at_least_two_bits_equal_true 
-from formula_manager import add_clauses, make_var, convert_to_cnf
+from formula_manager import add_clauses, make_var
 from printer import show_cnf, and_link, or_link
 
 
