@@ -21,10 +21,10 @@ def run_satsolver(steps_count, bottles_size, desired_number):
 def main():
 	parser = OptionParser()
 
-	parser.add_option('-o', '--optimal',           default=False,  help='find optimal solution',           action='store_true'       ,  dest='is_optimal_needed')
-	parser.add_option('-t', '--transfusionBound',  default=10000,  help='maximum number of transfusions',  action='store', type='int',  dest='transfusion_bound') 
-	parser.add_option('-b', '--bottleSizes',       default='',     help='size of each bottle',             action='store', type='str',  dest='bottle_sizes')
-	parser.add_option('-d', '--desiredNumber',     default=0,      help='desired number gallons',          action='store', type='int',  dest='desired_number')
+	parser.add_option('-o', '--optimal',           default=False,  help='find optimal solution',                      action='store_true'       ,  dest='is_optimal_needed')
+	parser.add_option('-t', '--transfusionBound',  default=10000,  help='maximum number of transfusions',             action='store', type='int',  dest='transfusion_bound') 
+	parser.add_option('-b', '--bottleCapacities',  default='',     help='comma-separated capacities of each bottle',  action='store', type='str',  dest='bottle_sizes')
+	parser.add_option('-d', '--desiredNumber',     default=0,      help='desired number gallons',                     action='store', type='int',  dest='desired_number')
 
 	(options, args) = parser.parse_args()
 
